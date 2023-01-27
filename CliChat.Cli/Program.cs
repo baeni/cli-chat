@@ -8,48 +8,70 @@ namespace CliChat.Cli
 
         static void Main(string[] args)
         {
+            // Checks if there are at least 3 arguments
+            // and returns if there are less.
+            ValidateConfiguration(args);
+
+            var applicationType = TryParseApplicationType(args[0]);
+
+            var address = args[1];
+            var port = int.Parse(args[2]);
+
+            switch (applicationType)
+            {
+                case ApplicationType.Server:
+                    SetUpAsServer(address, port);
+                    break;
+
+                case ApplicationType.Client:
+                    SetUpAsClient(address, port);
+                    break;
+            }
+        }
+
+        private static void ValidateConfiguration(string[] args)
+        {
             if (args.Length < 3)
             {
                 // TODO: Explain further
                 Console.WriteLine("Application is missconfigured.");
                 Console.ReadKey();
-                return;
             }
+        }
 
-            ApplicationType applicationType;
+        private static ApplicationType? TryParseApplicationType(string argument)
+        {
+            ApplicationType? applicationType = null;
 
             try
             {
-                applicationType = (ApplicationType)Enum.Parse(typeof(ApplicationType), args[0]);
+                applicationType = (ApplicationType)Enum.Parse(typeof(ApplicationType), argument);
             }
             catch (ArgumentException)
             {
                 Console.WriteLine("ApplicationType not valid.");
-                return;
             }
 
-            if (applicationType == ApplicationType.Server)
-            {
-                Console.WriteLine("Starting Server...");
-                var server = new ServerApp(args[1], int.Parse(args[2]));
-                server.Start();
+            return applicationType;
+        }
 
-                Console.ReadKey();
-            }
-            else if (applicationType == ApplicationType.Client)
-            {
-                Console.Write("What's your name?: ");
-                var input = Console.ReadLine();
-                var username = string.IsNullOrEmpty(input)
-                    ? "Unknown"
-                    : input;
+        private static void SetUpAsServer(string address, int port)
+        {
+            Console.WriteLine("Starting Server...");
+            var server = new ServerApp(address, port);
+            server.Start();
+        }
 
-                Console.WriteLine($"Welcome, {username}!");
-                var client = new ClientApp(args[1], int.Parse(args[2]), username);
-                client.Connect();
+        private static void SetUpAsClient(string address, int port)
+        {
+            Console.Write("What's your name?: ");
+            var input = Console.ReadLine();
+            var username = string.IsNullOrEmpty(input)
+                ? "Unknown"
+                : input;
 
-                Console.ReadKey();
-            }
+            var client = new ClientApp(address, port, username);
+            client.Connect();
         }
     }
 }
