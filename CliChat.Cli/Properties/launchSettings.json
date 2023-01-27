@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CliChat.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "Client 127.0.0.1 5000"
+    }
+  }
+}
