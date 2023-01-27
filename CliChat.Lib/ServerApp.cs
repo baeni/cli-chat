@@ -1,6 +1,7 @@
 ﻿using CliChat.Lib.Interfaces;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace CliChat.Lib
 {
@@ -28,7 +29,11 @@ namespace CliChat.Lib
             while (true)
             {
                 var tcpClient = TcpListener.AcceptTcpClient();
-                Console.WriteLine("A client has connected.");
+                var stream = tcpClient.GetStream();
+                var bytes = new byte[256];
+                int i = stream.Read(bytes, 0, bytes.Length);
+                var message = Encoding.UTF8.GetString(bytes, 0, i);
+                Console.WriteLine(message);
             }
         }
 
