@@ -30,6 +30,8 @@ namespace CliChat.Lib
 
             while (true)
             {
+                Console.WriteLine("Now accepting traffic.");
+
                 var tcpClient = TcpListener.AcceptTcpClient();
                 var stream = tcpClient.GetStream();
                 var bytes = new byte[256];
