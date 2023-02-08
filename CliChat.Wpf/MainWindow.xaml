@@ -1,0 +1,59 @@
+﻿<Window x:Class="CliChat.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CliChat.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="750">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Navbar-->
+        <Grid Grid.Row="0"
+              Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"
+                     Name="TextBox_Address"
+                     Background="Transparent">20.86.137.225</TextBox>
+            <TextBox Grid.Column="1"
+                     Name="TextBox_Port"
+                     Background="Transparent">5000</TextBox>
+            <TextBox Grid.Column="2"
+                     Name="TextBox_Username"
+                     Background="Transparent">Username</TextBox>
+            <Button Grid.Column="3"
+                    Name="Button_Connect"
+                    Click="Button_Connect_Click">Connect</Button>
+        </Grid>
+        
+        <!--#region Chat-->
+        <TextBlock Grid.Row="1"/>
+
+        <!--#region Input-->
+        <Grid Grid.Row="2"
+              Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"
+                     Name="TextBox_Input"
+                     Background="Transparent"/>
+            <Button Grid.Column="3"
+                    Name="Button_Send"
+                    Click="Button_Send_Click">Send</Button>
+        </Grid>
+    </Grid>
+</Window>
