@@ -48,6 +48,16 @@ namespace CliChat.Lib
         public void Disconnect()
         {
 
+        private void HandleIncomingTraffic()
+        {
+            while (true)
+            {
+                var stream = TcpClient.GetStream();
+                var buffer = new byte[256];
+                int i = stream.Read(buffer, 0, buffer.Length);
+                var message = Encoding.UTF8.GetString(buffer, 0, i);
+                Console.WriteLine(message);
+            }
         }
     }
 }
