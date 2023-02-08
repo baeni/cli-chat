@@ -33,9 +33,12 @@ namespace CliChat.Lib
             Console.WriteLine("Connection established!");
 
                 var message = $"{Username} has appeared.";
-                var bytes = Encoding.UTF8.GetBytes(message);
+            var buffer = Encoding.UTF8.GetBytes(message);
                 var stream = TcpClient.GetStream();
-                stream.Write(bytes, 0, bytes.Length);
+            stream.Write(buffer, 0, buffer.Length);
+
+            HandleOutgoingTrafficAsync();
+            HandleIncomingTraffic();
             }
             catch (SocketException)
             {
