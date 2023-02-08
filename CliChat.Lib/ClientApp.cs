@@ -64,9 +64,6 @@ namespace CliChat.Lib
             }
         }
 
-        public void Disconnect()
-        {
-
         private void HandleIncomingTraffic()
         {
             while (true)
