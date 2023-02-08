@@ -29,6 +29,13 @@ namespace CliChat.Lib
             try
             {
                 TcpClient.Connect(IPAddress.Parse(Address), Port);
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Server is not available.");
+                Console.ReadKey();
+                return;
+            }
 
             Console.WriteLine("Connection established!");
 
