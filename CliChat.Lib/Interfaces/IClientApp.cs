@@ -8,7 +8,7 @@ namespace CliChat.Lib.Interfaces
 
         string Username { get; }
 
-        Task Connect();
+        void Connect();
 
         void Disconnect();
     }
