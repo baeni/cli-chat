@@ -56,5 +56,31 @@ namespace CliChat.Lib
 
             TcpListener.Stop();
         }
+
+        private void HandleIncomingTraffic(IClientApp client)
+        {
+            while (true)
+            {
+                var stream = client.TcpClient.GetStream();
+                var buffer = new byte[256];
+                int i = stream.Read(buffer, 0, buffer.Length);
+                var message = Encoding.UTF8.GetString(buffer, 0, i);
+                Console.WriteLine(message);
+
+                foreach (var loopedClient in Clients.Where(x => x != client))
+                {
+                    if (!loopedClient.TcpClient.Connected)
+                    {
+                        loopedClient.TcpClient.Close();
+                        Clients.Remove(loopedClient);
+                        continue;
+                    }
+
+                    var forwardableMessage = $"{client.Username}: {Encoding.UTF8.GetString(buffer, 0, i)}";
+                    var forwardableBuffer = Encoding.UTF8.GetBytes(forwardableMessage);
+                    loopedClient.TcpClient.GetStream().Write(forwardableBuffer, 0, forwardableBuffer.Length);
+                }
+            }
+        }
     }
 }
