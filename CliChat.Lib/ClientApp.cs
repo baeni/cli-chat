@@ -47,9 +47,10 @@ namespace CliChat.Lib
             HandleOutgoingTrafficAsync();
             HandleIncomingTraffic();
             }
-            catch (SocketException)
+
+        public void Disconnect()
             {
-                Console.WriteLine("Server is not available.");
+
             }
 
         private async Task HandleOutgoingTrafficAsync()
