@@ -24,7 +24,7 @@ namespace CliChat.Lib
         public string Username { get; }
 
 
-        public void Connect()
+        public async Task Connect()
         {
             try
             {
