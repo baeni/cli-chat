@@ -34,9 +34,9 @@ namespace CliChat.Lib
 
                 var tcpClient = TcpListener.AcceptTcpClient();
                 var stream = tcpClient.GetStream();
-                var bytes = new byte[256];
-                int i = stream.Read(bytes, 0, bytes.Length);
-                var message = Encoding.UTF8.GetString(bytes, 0, i);
+                var buffer = new byte[256];
+                int i = stream.Read(buffer, 0, buffer.Length);
+                var message = Encoding.UTF8.GetString(buffer, 0, i);
                 Console.WriteLine(message);
             }
         }
