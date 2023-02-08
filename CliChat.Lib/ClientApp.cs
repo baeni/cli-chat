@@ -42,7 +42,15 @@ namespace CliChat.Lib
                 Console.WriteLine("Server is not available.");
             }
 
-            Console.ReadKey();
+        private async Task HandleOutgoingTrafficAsync()
+        {
+            while (true)
+            {
+                var message = await Task.Run(() => Console.ReadLine() ?? throw new NullReferenceException());
+                var buffer = Encoding.UTF8.GetBytes(message);
+                var stream = TcpClient.GetStream();
+                stream.Write(buffer, 0, buffer.Length);
+            }
         }
 
         public void Disconnect()
