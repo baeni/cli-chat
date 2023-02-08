@@ -1,8 +1,12 @@
 {
   "profiles": {
-    "CliChat.Cli": {
+    "Client Local": {
       "commandName": "Project",
       "commandLineArgs": "Client 127.0.0.1 5000"
+    },
+    "Client Remote": {
+      "commandName": "Project",
+      "commandLineArgs": "Client 20.86.137.225 5000"
     }
   }
 }
