@@ -30,6 +30,8 @@ namespace CliChat.Lib
             {
                 TcpClient.Connect(IPAddress.Parse(Address), Port);
 
+            Console.WriteLine("Connection established!");
+
                 var message = $"{Username} has appeared.";
                 var bytes = Encoding.UTF8.GetBytes(message);
                 var stream = TcpClient.GetStream();
