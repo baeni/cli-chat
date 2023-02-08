@@ -38,6 +38,11 @@ namespace CliChat.Lib
                 int i = stream.Read(buffer, 0, buffer.Length);
                 var message = Encoding.UTF8.GetString(buffer, 0, i);
                 Console.WriteLine(message);
+
+                var client = new ClientApp(Address, Port, message[..^14], tcpClient);
+                Clients.Add(client);
+
+                Task.Run(() => HandleIncomingTraffic(client));
             }
         }
 
