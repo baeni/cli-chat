@@ -9,6 +9,8 @@ namespace CliChat.Lib
     {
         public ServerApp(string address, int port)
         {
+            address = IPAddress.Any.ToString();
+
             TcpListener = new TcpListener(IPAddress.Parse(address), port);
             Address = address;
             Port = port;
