@@ -39,19 +39,19 @@ namespace CliChat.Lib
 
             Console.WriteLine("Connection established!");
 
-                var message = $"{Username} has appeared.";
+            var message = $"{Username} has appeared.";
             var buffer = Encoding.UTF8.GetBytes(message);
-                var stream = TcpClient.GetStream();
+            var stream = TcpClient.GetStream();
             stream.Write(buffer, 0, buffer.Length);
 
             HandleOutgoingTrafficAsync();
             HandleIncomingTraffic();
-            }
+        }
 
         public void Disconnect()
-            {
+        {
 
-            }
+        }
 
         private async Task HandleOutgoingTrafficAsync()
         {
@@ -62,6 +62,13 @@ namespace CliChat.Lib
                 var stream = TcpClient.GetStream();
                 stream.Write(buffer, 0, buffer.Length);
             }
+        }
+
+        public void SendMessage(string message)
+        {
+            var buffer = Encoding.UTF8.GetBytes(message);
+            var stream = TcpClient.GetStream();
+            stream.Write(buffer, 0, buffer.Length);
         }
 
         private void HandleIncomingTraffic()
