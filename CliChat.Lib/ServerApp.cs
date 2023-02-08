@@ -48,6 +48,12 @@ namespace CliChat.Lib
 
         public void Stop()
         {
+            foreach (var client in Clients)
+            {
+                client.TcpClient.Close();
+                Clients.Remove(client);
+            }
+
             TcpListener.Stop();
         }
     }
