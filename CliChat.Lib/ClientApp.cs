@@ -7,9 +7,9 @@ namespace CliChat.Lib
 {
     public class ClientApp : IClientApp
     {
-        public ClientApp(string address, int port, string username)
+        public ClientApp(string address, int port, string username, TcpClient? tcpClient = null)
         {
-            TcpClient = new TcpClient();
+            TcpClient = tcpClient ?? new TcpClient();
             Address = address;
             Port = port;
             Username = username;
